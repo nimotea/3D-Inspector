@@ -29,7 +29,7 @@ const camera = new ArcRotateCamera(
 );
 camera.attachControl(true);
 
-const litgt = new HemisphericLight(
+const light = new HemisphericLight(
   "hemisphereLight",
   new Vector3(0, 20, 0),
   scene
