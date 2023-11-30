@@ -1,24 +1,57 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import {
+  Vector3,
+  Scene,
+  Engine,
+  MeshBuilder,
+  SceneLoader,
+  CreateGround,
+  ArcRotateCamera,
+  HemisphericLight,
+} from "@babylonjs/core";
+import { Inspector } from "@babylonjs/inspector";
+import * as GUI from "@babylonjs/gui";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// declare canvas dom
+const canvas = document.getElementById("renderCanvas");
 
-setupCounter(document.querySelector('#counter'))
+// create babylonjs engine
+const engine = new Engine(canvas);
+
+const scene = new Scene(engine);
+
+const camera = new ArcRotateCamera(
+  "arcRotateCamer",
+  0,
+  0,
+  10,
+  new Vector3(0, 0, 0),
+  scene
+);
+camera.attachControl(true);
+
+const litgt = new HemisphericLight(
+  "hemisphereLight",
+  new Vector3(0, 20, 0),
+  scene
+);
+
+const loadModelFile = async () => {
+  const models = await SceneLoader.ImportMeshAsync(
+    null,
+    "./",
+    "RobotExpressive.glb",
+    scene
+  );
+  const robot = models.meshes[0];
+};
+
+const ground = CreateGround("ground",{width:50,height:50});
+loadModelFile();
+
+engine.runRenderLoop(function () {
+  scene.render();
+});
+
+// open / disabled inspector
+
+// Inspector.Show(scene);
