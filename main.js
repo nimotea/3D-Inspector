@@ -54,4 +54,4 @@ engine.runRenderLoop(function () {
 
 // open / disabled inspector
 
-// Inspector.Show(scene);
+Inspector.Show(scene);
