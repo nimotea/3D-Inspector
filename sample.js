@@ -506,9 +506,22 @@ import {
     if(button.textBlock.text === "机器人"){
       button.textBlock.text = "园区";
       scene.activeCamera = camera2;
+      camera.inputs.attached.mousewheel.detachControl();
+      camera.inputs.attached.pointers.detachControl();
+      camera.inputs.attached.keyboard.detachControl();
+      camera2.inputs.attachInput(camera2.inputs.attached.mousewheel);
+      camera2.inputs.attachInput(camera2.inputs.attached.pointers);
+      camera2.inputs.attachInput(camera2.inputs.attached.keyboard);
+
     }else{
       button.textBlock.text = "机器人";
       scene.activeCamera = camera;
+      camera2.inputs.attached.mousewheel.detachControl();
+      camera2.inputs.attached.pointers.detachControl();
+      camera2.inputs.attached.keyboard.detachControl();
+      camera.inputs.attachInput(camera.inputs.attached.mousewheel);
+      camera.inputs.attachInput(camera.inputs.attached.pointers);
+      camera.inputs.attachInput(camera.inputs.attached.keyboard);
     }
   })
 
