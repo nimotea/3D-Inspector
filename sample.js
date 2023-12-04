@@ -536,7 +536,7 @@ import {
   camera2.lowerHeightOffsetLimit = 3;
 
   camera2.maxCameraSpeed = 10;
-  camera2.attachControl(canvas, true);
+  camera2.attachControl(true);
 
 
   const danceAnim = scene.getAnimationGroupByName("Dance");
